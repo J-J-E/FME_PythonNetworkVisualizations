@@ -22,6 +22,6 @@ See [Example Output Folder](ExampleOutput)
 1. Download file
 2. Open in Browser  
   
-  
+Sales.HTML Screenshot below
 ![Sales.html Screenshot](ExampleOutput/Sales_Screenshot.PNG)
 
