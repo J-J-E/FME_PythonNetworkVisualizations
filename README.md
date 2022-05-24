@@ -4,7 +4,7 @@
 # SETUP
 A few different python modules need to be installed into the FME Python Directory for this to function correctly 
 
-1. Modules needed - pandas, networkx, matplotlib, pyvis
+1. Modules needed - __pandas, networkx, matplotlib, pyvis__
     - [FME Documentation for Python](https://docs.safe.com/fme/2020.0/html/FME_Desktop_Documentation/FME_IntegrationConsole/Workbench/Installing-Python-Packages.htm)
     - Windows command line example: `fme.exe python -m pip install pandas --target C:\Users\<user>\Documents\FME\Plugins\Python`
     - Linux command line example: `./fme python -m pip install pandas --target ~/Library/Application\ Support/FME/Plugins/Python`
