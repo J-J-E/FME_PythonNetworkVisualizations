@@ -5,7 +5,8 @@
  
  The general idea is to map the relationships between _source_ and _desintation_ nodes in a network. In this case, the source and destination nodes are tables and table views as returned by the below (or similar) query. This could also be done by mapping the PK/FK keys in the database, however, the python script inside the FME workspace was written explicitly to identify and format VIEWS and TABLES to idenfity the relationships between the objects. 
 
- ~~~select distinct schema_name(v.schema_id) as schema_name,
+ ~~~
+ select distinct schema_name(v.schema_id) as schema_name,
        v.name as view_name,
 	   V.type_desc as view_type,
        o.name as referenced_entity_name,
