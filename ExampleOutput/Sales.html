@@ -1,0 +1,80 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vis-network@latest/styles/vis-network.css" type="text/css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vis-network@latest/dist/vis-network.min.js"> </script>
+<center>
+<h1>Sales</h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 100%;
+            height: 94%;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"color": "blue", "id": "vSalesPerson", "label": "vSalesPerson", "shape": "dot", "size": 61.91736422399997, "title": " Neighbors:StateProvince  |  PhoneNumberType  |  Address  |  SalesPerson  |  Employee  |  SalesTerritory  |  CountryRegion  |  EmailAddress  |  Person  |  BusinessEntityAddress  |  PersonPhone"}, {"color": "red", "id": "Employee", "label": "Employee", "shape": "dot", "size": 12.0, "title": " Neighbors:vSalesPerson  |  vSalesPersonSalesByFiscalYears"}, {"color": "red", "id": "Address", "label": "Address", "shape": "dot", "size": 10, "title": " Neighbors:vSalesPerson"}, {"color": "red", "id": "BusinessEntityAddress", "label": "BusinessEntityAddress", "shape": "dot", "size": 10, "title": " Neighbors:vSalesPerson"}, {"color": "red", "id": "CountryRegion", "label": "CountryRegion", "shape": "dot", "size": 10, "title": " Neighbors:vSalesPerson"}, {"color": "red", "id": "EmailAddress", "label": "EmailAddress", "shape": "dot", "size": 10, "title": " Neighbors:vSalesPerson"}, {"color": "red", "id": "Person", "label": "Person", "shape": "dot", "size": 12.0, "title": " Neighbors:vSalesPerson  |  vSalesPersonSalesByFiscalYears"}, {"color": "red", "id": "PersonPhone", "label": "PersonPhone", "shape": "dot", "size": 10, "title": " Neighbors:vSalesPerson"}, {"color": "red", "id": "PhoneNumberType", "label": "PhoneNumberType", "shape": "dot", "size": 10, "title": " Neighbors:vSalesPerson"}, {"color": "red", "id": "StateProvince", "label": "StateProvince", "shape": "dot", "size": 10, "title": " Neighbors:vSalesPerson"}, {"color": "red", "id": "SalesPerson", "label": "SalesPerson", "shape": "dot", "size": 12.0, "title": " Neighbors:vSalesPerson  |  vSalesPersonSalesByFiscalYears"}, {"color": "red", "id": "SalesTerritory", "label": "SalesTerritory", "shape": "dot", "size": 12.0, "title": " Neighbors:vSalesPerson  |  vSalesPersonSalesByFiscalYears"}, {"color": "blue", "id": "vSalesPersonSalesByFiscalYears", "label": "vSalesPersonSalesByFiscalYears", "shape": "dot", "size": 20.735999999999997, "title": " Neighbors:SalesOrderHeader  |  Employee  |  SalesTerritory  |  SalesPerson  |  Person"}, {"color": "red", "id": "SalesOrderHeader", "label": "SalesOrderHeader", "shape": "dot", "size": 10, "title": " Neighbors:vSalesPersonSalesByFiscalYears"}]);
+        edges = new vis.DataSet([{"color": "black", "from": "vSalesPerson", "label": 1, "to": "Employee", "weight": 1}, {"color": "black", "from": "vSalesPerson", "label": 1, "to": "Address", "weight": 1}, {"color": "black", "from": "vSalesPerson", "label": 1, "to": "BusinessEntityAddress", "weight": 1}, {"color": "black", "from": "vSalesPerson", "label": 1, "to": "CountryRegion", "weight": 1}, {"color": "black", "from": "vSalesPerson", "label": 1, "to": "EmailAddress", "weight": 1}, {"color": "black", "from": "vSalesPerson", "label": 1, "to": "Person", "weight": 1}, {"color": "black", "from": "vSalesPerson", "label": 1, "to": "PersonPhone", "weight": 1}, {"color": "black", "from": "vSalesPerson", "label": 1, "to": "PhoneNumberType", "weight": 1}, {"color": "black", "from": "vSalesPerson", "label": 1, "to": "StateProvince", "weight": 1}, {"color": "black", "from": "vSalesPerson", "label": 1, "to": "SalesPerson", "weight": 1}, {"color": "black", "from": "vSalesPerson", "label": 1, "to": "SalesTerritory", "weight": 1}, {"color": "black", "from": "Employee", "label": 1, "to": "vSalesPersonSalesByFiscalYears", "weight": 1}, {"color": "black", "from": "Person", "label": 1, "to": "vSalesPersonSalesByFiscalYears", "weight": 1}, {"color": "black", "from": "SalesPerson", "label": 1, "to": "vSalesPersonSalesByFiscalYears", "weight": 1}, {"color": "black", "from": "SalesTerritory", "label": 1, "to": "vSalesPersonSalesByFiscalYears", "weight": 1}, {"color": "black", "from": "vSalesPersonSalesByFiscalYears", "label": 1, "to": "SalesOrderHeader", "weight": 1}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {"nodes": {"color": {"highlight": {"border": "rgba(129,11,233,1)"}}, "font": {"size": 12, "face": "verdana", "strokeWidth": 2}, "shadow": {"enabled": true, "size": 9, "x": 6, "y": 7}, "shapeProperties": {"borderRadius": 3}, "size": null}, "physics": {"enabled": false, "barnesHut": {"avoidOverlap": 0.5}, "minVelocity": 3}};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>

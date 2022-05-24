@@ -1,0 +1,80 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vis-network@latest/styles/vis-network.css" type="text/css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vis-network@latest/dist/vis-network.min.js"> </script>
+<center>
+<h1>Employees</h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 100%;
+            height: 94%;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"color": "blue", "id": "vEmployee", "label": "vEmployee", "shape": "dot", "size": 42.99816959999998, "title": " Neighbors:StateProvince  |  PhoneNumberType  |  Address  |  Employee  |  CountryRegion  |  EmailAddress  |  Person  |  BusinessEntityAddress  |  PersonPhone"}, {"color": "red", "id": "Employee", "label": "Employee", "shape": "dot", "size": 14.399999999999999, "title": " Neighbors:vEmployeeDepartmentHistory  |  vEmployeeDepartment  |  vEmployee"}, {"color": "red", "id": "Address", "label": "Address", "shape": "dot", "size": 10, "title": " Neighbors:vEmployee"}, {"color": "red", "id": "BusinessEntityAddress", "label": "BusinessEntityAddress", "shape": "dot", "size": 10, "title": " Neighbors:vEmployee"}, {"color": "red", "id": "CountryRegion", "label": "CountryRegion", "shape": "dot", "size": 10, "title": " Neighbors:vEmployee"}, {"color": "red", "id": "EmailAddress", "label": "EmailAddress", "shape": "dot", "size": 10, "title": " Neighbors:vEmployee"}, {"color": "red", "id": "Person", "label": "Person", "shape": "dot", "size": 14.399999999999999, "title": " Neighbors:vEmployeeDepartmentHistory  |  vEmployeeDepartment  |  vEmployee"}, {"color": "red", "id": "PersonPhone", "label": "PersonPhone", "shape": "dot", "size": 10, "title": " Neighbors:vEmployee"}, {"color": "red", "id": "PhoneNumberType", "label": "PhoneNumberType", "shape": "dot", "size": 10, "title": " Neighbors:vEmployee"}, {"color": "red", "id": "StateProvince", "label": "StateProvince", "shape": "dot", "size": 10, "title": " Neighbors:vEmployee"}, {"color": "blue", "id": "vEmployeeDepartment", "label": "vEmployeeDepartment", "shape": "dot", "size": 17.279999999999998, "title": " Neighbors:Employee  |  Department  |  Person  |  EmployeeDepartmentHistory"}, {"color": "blue", "id": "vEmployeeDepartmentHistory", "label": "vEmployeeDepartmentHistory", "shape": "dot", "size": 20.735999999999997, "title": " Neighbors:Shift  |  Employee  |  Department  |  EmployeeDepartmentHistory  |  Person"}, {"color": "red", "id": "Department", "label": "Department", "shape": "dot", "size": 12.0, "title": " Neighbors:vEmployeeDepartmentHistory  |  vEmployeeDepartment"}, {"color": "red", "id": "EmployeeDepartmentHistory", "label": "EmployeeDepartmentHistory", "shape": "dot", "size": 12.0, "title": " Neighbors:vEmployeeDepartmentHistory  |  vEmployeeDepartment"}, {"color": "red", "id": "Shift", "label": "Shift", "shape": "dot", "size": 10, "title": " Neighbors:vEmployeeDepartmentHistory"}, {"color": "blue", "id": "vJobCandidateEmployment", "label": "vJobCandidateEmployment", "shape": "dot", "size": 10, "title": " Neighbors:JobCandidate"}, {"color": "red", "id": "JobCandidate", "label": "JobCandidate", "shape": "dot", "size": 10, "title": " Neighbors:vJobCandidateEmployment"}]);
+        edges = new vis.DataSet([{"color": "black", "from": "vEmployee", "label": 1, "to": "Employee", "weight": 1}, {"color": "black", "from": "vEmployee", "label": 1, "to": "Address", "weight": 1}, {"color": "black", "from": "vEmployee", "label": 1, "to": "BusinessEntityAddress", "weight": 1}, {"color": "black", "from": "vEmployee", "label": 1, "to": "CountryRegion", "weight": 1}, {"color": "black", "from": "vEmployee", "label": 1, "to": "EmailAddress", "weight": 1}, {"color": "black", "from": "vEmployee", "label": 1, "to": "Person", "weight": 1}, {"color": "black", "from": "vEmployee", "label": 1, "to": "PersonPhone", "weight": 1}, {"color": "black", "from": "vEmployee", "label": 1, "to": "PhoneNumberType", "weight": 1}, {"color": "black", "from": "vEmployee", "label": 1, "to": "StateProvince", "weight": 1}, {"color": "black", "from": "Employee", "label": 1, "to": "vEmployeeDepartment", "weight": 1}, {"color": "black", "from": "Employee", "label": 1, "to": "vEmployeeDepartmentHistory", "weight": 1}, {"color": "black", "from": "Person", "label": 1, "to": "vEmployeeDepartment", "weight": 1}, {"color": "black", "from": "Person", "label": 1, "to": "vEmployeeDepartmentHistory", "weight": 1}, {"color": "black", "from": "vEmployeeDepartment", "label": 1, "to": "Department", "weight": 1}, {"color": "black", "from": "vEmployeeDepartment", "label": 1, "to": "EmployeeDepartmentHistory", "weight": 1}, {"color": "black", "from": "Department", "label": 1, "to": "vEmployeeDepartmentHistory", "weight": 1}, {"color": "black", "from": "EmployeeDepartmentHistory", "label": 1, "to": "vEmployeeDepartmentHistory", "weight": 1}, {"color": "black", "from": "vEmployeeDepartmentHistory", "label": 1, "to": "Shift", "weight": 1}, {"color": "black", "from": "vJobCandidateEmployment", "label": 1, "to": "JobCandidate", "weight": 1}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {"nodes": {"color": {"highlight": {"border": "rgba(129,11,233,1)"}}, "font": {"size": 12, "face": "verdana", "strokeWidth": 2}, "shadow": {"enabled": true, "size": 9, "x": 6, "y": 7}, "shapeProperties": {"borderRadius": 3}, "size": null}, "physics": {"enabled": false, "barnesHut": {"avoidOverlap": 0.5}, "minVelocity": 3}};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>
