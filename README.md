@@ -23,5 +23,5 @@ See [Example Output Folder](ExampleOutput)
 2. Open in Browser  
   
   
-![Sales.html Screenshot](ExampleOutput/SalesScreenshot.PNG)
+![Sales.html Screenshot](ExampleOutput/Sales_Screenshot.PNG)
 
